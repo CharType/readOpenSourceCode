@@ -48,16 +48,25 @@
 #define FAT_MAGIC	0xcafebabe
 #define FAT_CIGAM	0xbebafeca	/* NXSwapLong(FAT_MAGIC) */
 
+// fatHeader描述
 struct fat_header {
+    // 是一个常量 FAT_MAGIC 加载器通过这个常量值判断是什么类型的文件,通用二进制格式还是胖二进制格式
 	uint32_t	magic;		/* FAT_MAGIC */
+    // 指当前通用的二进制文件包含了多少个不同架构的Mac-O文件
 	uint32_t	nfat_arch;	/* number of structs that follow */
 };
 
+// nfat_arch 有多少个二进制文件就会有多少个 fat_arch 结构体
 struct fat_arch {
+    // 标识CPU架构 arm，X86_64
 	cpu_type_t	cputype;	/* cpu specifier (int) */
+    // 标识具体的CPU类型，区分不同版本的处理器 armv7 类型或者是arm64架构类型
 	cpu_subtype_t	cpusubtype;	/* machine specifier (int) */
+    // 指定该CPU架构数据相对于文件开头的偏移量
 	uint32_t	offset;		/* file offset to this object file */
+    // 指定该CPU架构的数据大小
 	uint32_t	size;		/* size of this object file */
+    // 指定数据的内存对齐边界，取值必须是2的N次方，可以使用otool工具 -f 查看fat_header结构 -v参数显示详细的参数
 	uint32_t	align;		/* alignment as a power of 2 */
 };
 
