@@ -1,0 +1,177 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		88986EBB25CC19190074BDC0 /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tools; sourceTree = "<group>"; };
+		88986EBC25CC19190074BDC0 /* libsa */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libsa; sourceTree = "<group>"; };
+		88986EBD25CC19190074BDC0 /* APPLE_LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = APPLE_LICENSE; sourceTree = "<group>"; };
+		88986EBE25CC19190074BDC0 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
+		88986EBF25CC19190074BDC0 /* security */ = {isa = PBXFileReference; lastKnownFileType = folder; path = security; sourceTree = "<group>"; };
+		88986EC025CC19190074BDC0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		88986EC125CC19190074BDC0 /* iokit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iokit; sourceTree = "<group>"; };
+		88986EC225CC19190074BDC0 /* SETUP */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SETUP; sourceTree = "<group>"; };
+		88986EC325CC19190074BDC0 /* bsd */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bsd; sourceTree = "<group>"; };
+		88986EC425CC19190074BDC0 /* EXTERNAL_HEADERS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EXTERNAL_HEADERS; sourceTree = "<group>"; };
+		88986EC525CC19190074BDC0 /* libsyscall */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libsyscall; sourceTree = "<group>"; };
+		88986EC625CC19190074BDC0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		88986EC725CC19190074BDC0 /* makedefs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = makedefs; sourceTree = "<group>"; };
+		88986EC825CC19190074BDC0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		88986EC925CC19190074BDC0 /* .clang-format */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".clang-format"; sourceTree = "<group>"; };
+		88986ECA25CC19190074BDC0 /* pexpert */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pexpert; sourceTree = "<group>"; };
+		88986ECB25CC19190074BDC0 /* san */ = {isa = PBXFileReference; lastKnownFileType = folder; path = san; sourceTree = "<group>"; };
+		88986ECC25CC19190074BDC0 /* libkdd */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libkdd; sourceTree = "<group>"; };
+		88986ECD25CC19190074BDC0 /* osfmk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = osfmk; sourceTree = "<group>"; };
+		88986ECE25CC19190074BDC0 /* libkern */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libkern; sourceTree = "<group>"; };
+		88986ECF25CC19190074BDC0 /* .upstream_base_commits */ = {isa = PBXFileReference; lastKnownFileType = text; path = .upstream_base_commits; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		88986EB525CC19190074BDC0 = {
+			isa = PBXGroup;
+			children = (
+				88986EBB25CC19190074BDC0 /* tools */,
+				88986EBC25CC19190074BDC0 /* libsa */,
+				88986EBD25CC19190074BDC0 /* APPLE_LICENSE */,
+				88986EBE25CC19190074BDC0 /* config */,
+				88986EBF25CC19190074BDC0 /* security */,
+				88986EC025CC19190074BDC0 /* Makefile */,
+				88986EC125CC19190074BDC0 /* iokit */,
+				88986EC225CC19190074BDC0 /* SETUP */,
+				88986EC325CC19190074BDC0 /* bsd */,
+				88986EC425CC19190074BDC0 /* EXTERNAL_HEADERS */,
+				88986EC525CC19190074BDC0 /* libsyscall */,
+				88986EC625CC19190074BDC0 /* README.md */,
+				88986EC725CC19190074BDC0 /* makedefs */,
+				88986EC825CC19190074BDC0 /* .gitignore */,
+				88986EC925CC19190074BDC0 /* .clang-format */,
+				88986ECA25CC19190074BDC0 /* pexpert */,
+				88986ECB25CC19190074BDC0 /* san */,
+				88986ECC25CC19190074BDC0 /* libkdd */,
+				88986ECD25CC19190074BDC0 /* osfmk */,
+				88986ECE25CC19190074BDC0 /* libkern */,
+				88986ECF25CC19190074BDC0 /* .upstream_base_commits */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		88986EBA25CC19190074BDC0 /* xnu-4570.1.46 */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 88986ED025CC19190074BDC0 /* Build configuration list for PBXLegacyTarget "xnu-4570.1.46" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/chartype/我的文件夹/学习整理/苹果一些源码/xnu-4570.1.46";
+			dependencies = (
+			);
+			name = "xnu-4570.1.46";
+			passBuildSettingsInEnvironment = 1;
+			productName = "xnu-4570.1.46";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		88986EB625CC19190074BDC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 88986EB925CC19190074BDC0 /* Build configuration list for PBXProject "xnu-4570.1.46" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 88986EB525CC19190074BDC0;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88986EBA25CC19190074BDC0 /* xnu-4570.1.46 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		88986EB725CC19190074BDC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		88986EB825CC19190074BDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		88986ED125CC19190074BDC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "xnu-4570.1.46";
+			};
+			name = Debug;
+		};
+		88986ED225CC19190074BDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "xnu-4570.1.46";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		88986EB925CC19190074BDC0 /* Build configuration list for PBXProject "xnu-4570.1.46" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88986EB725CC19190074BDC0 /* Debug */,
+				88986EB825CC19190074BDC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88986ED025CC19190074BDC0 /* Build configuration list for PBXLegacyTarget "xnu-4570.1.46" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88986ED125CC19190074BDC0 /* Debug */,
+				88986ED225CC19190074BDC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88986EB625CC19190074BDC0 /* Project object */;
+}
