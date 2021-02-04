@@ -70,13 +70,21 @@ struct mach_header {
  * 64-bit architectures.
  */
 struct mach_header_64 {
+    // 用来标识当前设备是大端序还是小端序，iOS是小端序 MH_MAGIC_64 0xfeedfacf
 	uint32_t	magic;		/* mach magic number identifier */
+    // 标识CPU架构 arm，X86_64
 	cpu_type_t	cputype;	/* cpu specifier */
+    // 标识具体的CPU类型，区分不同版本的处理器 armv7 类型或者是arm64架构类型
 	cpu_subtype_t	cpusubtype;	/* machine specifier */
+    // Mach-O的文件类型，可执行文件，符号文件，内核扩展文件等
 	uint32_t	filetype;	/* type of file */
+    // Mach-O文件加载命令的数量，Load commands的数量
 	uint32_t	ncmds;		/* number of load commands */
+    // Mach-O文件加载命令占用的总字节大小
 	uint32_t	sizeofcmds;	/* the size of all the load commands */
+    // Mach-O文件的一些标志信息
 	uint32_t	flags;		/* flags */
+    // 保留字段
 	uint32_t	reserved;	/* reserved */
 };
 
@@ -107,16 +115,24 @@ struct mach_header_64 {
  *
  * Constants for the filetype field of the mach_header
  */
+// 代码编译的中间产物(.o)文件属于MH_OBJECT类型的Mach-O格式文件，
+// .a静态库实际上就是一堆.o文件集合，也属于MH_OBJECT类型的Mach-O格式文件
 #define	MH_OBJECT	0x1		/* relocatable object file */
+// 可执行文件，打包之后的.app 或者.ipa包中都有可执行文件
 #define	MH_EXECUTE	0x2		/* demand paged executable file */
+//VM共享库文件(不指定哪个地方在使用)
 #define	MH_FVMLIB	0x3		/* fixed VM shared library file */
 #define	MH_CORE		0x4		/* core file */
+// preload
 #define	MH_PRELOAD	0x5		/* preloaded executable file */
+// 系统的动态共享库，比如UIKit之类的
 #define	MH_DYLIB	0x6		/* dynamically bound shared library */
+// 系统的动态链接库 比如 dyld
 #define	MH_DYLINKER	0x7		/* dynamic link editor */
 #define	MH_BUNDLE	0x8		/* dynamically bound bundle file */
 #define	MH_DYLIB_STUB	0x9		/* shared library stub for static */
 					/*  linking only, no section contents */
+// 符号文件和调试信息
 #define	MH_DSYM		0xa		/* companion file with only debug */
 					/*  sections */
 #define	MH_KEXT_BUNDLE	0xb		/* x86_64 kexts */
@@ -186,6 +202,7 @@ struct mach_header_64 {
 					  the static linker does not need to
 					  examine dependent dylibs to see
 					  if any are re-exported */
+// 这个标记只在MH_EXECUTE中使用，表示启用ASLR地址空间布局随机化来增加程序的安全性
 #define	MH_PIE 0x200000			/* When this bit is set, the OS will
 					   load the main executable at a
 					   random address.  Only used in
