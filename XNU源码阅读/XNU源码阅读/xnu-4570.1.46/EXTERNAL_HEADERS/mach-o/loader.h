@@ -129,6 +129,7 @@ struct mach_header_64 {
 #define	MH_DYLIB	0x6		/* dynamically bound shared library */
 // 系统的动态链接库 比如 dyld
 #define	MH_DYLINKER	0x7		/* dynamic link editor */
+// 插件 如系统的QuickLook插件
 #define	MH_BUNDLE	0x8		/* dynamically bound bundle file */
 #define	MH_DYLIB_STUB	0x9		/* shared library stub for static */
 					/*  linking only, no section contents */
@@ -138,6 +139,7 @@ struct mach_header_64 {
 #define	MH_KEXT_BUNDLE	0xb		/* x86_64 kexts */
 
 /* Constants for the flags field of the mach_header */
+// 表示目标没有带有未定义的符号
 #define	MH_NOUNDEFS	0x1		/* the object file has no undefined
 					   references */
 #define	MH_INCRLINK	0x2		/* the object file is the output of an
@@ -244,8 +246,11 @@ struct mach_header_64 {
  * to these tables will not work well or at all on some machines.  With all
  * padding zeroed like objects will compare byte for byte.
  */
+// 加载命令定义，根据不同的加载命令类型，内核会使用不同的函数来解析
 struct load_command {
+    // 表示当前加载命令的类型
 	uint32_t cmd;		/* type of load command */
+    // 表示当前加载命令的大小
 	uint32_t cmdsize;	/* total size of command in bytes */
 };
 
@@ -261,7 +266,9 @@ struct load_command {
 #define LC_REQ_DYLD 0x80000000
 
 /* Constants for the cmd field of all load commands, the type */
+// 定义一个段，加载后映射到内存中 64位使用的是 LC_SEGMENT_64来定义一个段
 #define	LC_SEGMENT	0x1	/* segment of this file to be mapped */
+// Mach-O文件使用的符号表，包含符号表的偏移量，符号数，字符串表偏移量，字符串表大小
 #define	LC_SYMTAB	0x2	/* link-edit stab symbol table info */
 #define	LC_SYMSEG	0x3	/* link-edit gdb symbol table info (obsolete) */
 #define	LC_THREAD	0x4	/* thread */
@@ -271,9 +278,13 @@ struct load_command {
 #define	LC_IDENT	0x8	/* object identification info (obsolete) */
 #define LC_FVMFILE	0x9	/* fixed VM file inclusion (internal use) */
 #define LC_PREPAGE      0xa     /* prepage command (internal use) */
+// 动态链接器使用的符号表，间接符号表偏移量
 #define	LC_DYSYMTAB	0xb	/* dynamic link-edit symbol table info */
+// 依赖的动态库，包括动态库路径，当前版本，兼容版本等
+// @rpath(当前ipa目录) 的路径指定动态链接器搜索路径列表
 #define	LC_LOAD_DYLIB	0xc	/* load a dynamically linked shared library */
 #define	LC_ID_DYLIB	0xd	/* dynamically linked shared lib ident */
+// 默认的动态链接器路径 /usr/bin/dyld
 #define LC_LOAD_DYLINKER 0xe	/* load a dynamic linker */
 #define LC_ID_DYLINKER	0xf	/* dynamic linker identification */
 #define	LC_PREBOUND_DYLIB 0x10	/* modules prebound for a dynamically */
@@ -295,25 +306,34 @@ struct load_command {
 #define	LC_SEGMENT_64	0x19	/* 64-bit segment of this file to be
 				   mapped */
 #define	LC_ROUTINES_64	0x1a	/* 64-bit image routines */
+// Mach-O文件标识。DSYM文件和崩溃堆栈中都存在这个值，可以用来分析对应崩溃的位置
 #define LC_UUID		0x1b	/* the uuid */
 #define LC_RPATH       (0x1c | LC_REQ_DYLD)    /* runpath additions */
+// 代码签名信息
 #define LC_CODE_SIGNATURE 0x1d	/* local of code signature */
 #define LC_SEGMENT_SPLIT_INFO 0x1e /* local of info to split segments */
 #define LC_REEXPORT_DYLIB (0x1f | LC_REQ_DYLD) /* load and re-export dylib */
 #define	LC_LAZY_LOAD_DYLIB 0x20	/* delay load of dylib until first use */
 #define	LC_ENCRYPTION_INFO 0x21	/* encrypted segment information */
 #define	LC_DYLD_INFO 	0x22	/* compressed dyld information */
+// 记录了动态链接的重要信息，动态链接器根据这个命令进行地址重定向（一些大小和偏移量）
 #define	LC_DYLD_INFO_ONLY (0x22|LC_REQ_DYLD)	/* compressed dyld information only */
 #define	LC_LOAD_UPWARD_DYLIB (0x23 | LC_REQ_DYLD) /* load upward dylib */
 #define LC_VERSION_MIN_MACOSX 0x24   /* build for MacOSX min OS version */
+// Mach-O文件要求的最低系统版本，和Xcode中配置的target有关系
 #define LC_VERSION_MIN_IPHONEOS 0x25 /* build for iPhoneOS min OS version */
+// 函数起始地址列表，有这个表，调试器或者其他程序能够判断一个地址是否在这个表的范围内
 #define LC_FUNCTION_STARTS 0x26 /* compressed table of function start addresses */
 #define LC_DYLD_ENVIRONMENT 0x27 /* string for dyld to treat
 				    like environment variable */
+// 程序的入口。动态链接器获取该地址，然后程序跳转到这个地址执行
 #define LC_MAIN (0x28|LC_REQ_DYLD) /* replacement for LC_UNIXTHREAD */
+// 定义在代码段内的非指令表
 #define LC_DATA_IN_CODE 0x29 /* table of non-instructions in __text */
+// 构建二进制文件的源代码版本
 #define LC_SOURCE_VERSION 0x2A /* source version used to build binary */
 #define LC_DYLIB_CODE_SIGN_DRS 0x2B /* Code signing DRs copied from linked dylibs */
+//Mach-O文件的加密信息，包括加密标记，，加密数据的便宜大小 逆向脱壳会用到
 #define	LC_ENCRYPTION_INFO_64 0x2C /* 64-bit encrypted segment information */
 #define LC_LINKER_OPTION 0x2D /* linker options in MH_OBJECT files */
 #define LC_LINKER_OPTIMIZATION_HINT 0x2E /* optimization hints in MH_OBJECT files */
