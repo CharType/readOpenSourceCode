@@ -408,7 +408,8 @@ struct segment_command_64 { /* for 64-bit architectures */
 	vm_prot_t	maxprot;	/* maximum VM protection */
     // 段页面的初始内存保护
 	vm_prot_t	initprot;	/* initial VM protection */
-    // 段中包含的字节数量。一个段可以包含0个或者多个字节
+    // 段中的section数量，如果段中存在section，这个值是section的数量
+    // 一个段可以包含0个或者多个section
 	uint32_t	nsects;		/* number of sections in segment */
     // 段的标志信息
 	uint32_t	flags;		/* flags */
