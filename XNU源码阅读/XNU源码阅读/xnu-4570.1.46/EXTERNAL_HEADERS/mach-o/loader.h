@@ -390,16 +390,27 @@ struct segment_command { /* for 32-bit architectures */
  * command and their size is reflected in cmdsize.
  */
 struct segment_command_64 { /* for 64-bit architectures */
+    // 表示当前加载命令的类型
 	uint32_t	cmd;		/* LC_SEGMENT_64 */
+    // 表示当前加载命令的大小
 	uint32_t	cmdsize;	/* includes sizeof section_64 structs */
+    // 段名称，占用16个字节
 	char		segname[16];	/* segment name */
+    // 段的虚拟内存地址
 	uint64_t	vmaddr;		/* memory address of this segment */
+    // 段的虚拟内存大小
 	uint64_t	vmsize;		/* memory size of this segment */
+    // 段在文件中的偏移量
 	uint64_t	fileoff;	/* file offset of this segment */
+    // 段在文件中的大小
 	uint64_t	filesize;	/* amount to map from the file */
+    // 段页面的最高内存保护
 	vm_prot_t	maxprot;	/* maximum VM protection */
+    // 段页面的初始内存保护
 	vm_prot_t	initprot;	/* initial VM protection */
+    // 段中包含的字节数量。一个段可以包含0个或者多个字节
 	uint32_t	nsects;		/* number of sections in segment */
+    // 段的标志信息
 	uint32_t	flags;		/* flags */
 };
 
