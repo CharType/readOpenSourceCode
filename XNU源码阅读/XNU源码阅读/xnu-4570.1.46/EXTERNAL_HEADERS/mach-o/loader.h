@@ -473,15 +473,25 @@ struct section { /* for 32-bit architectures */
 };
 
 struct section_64 { /* for 64-bit architectures */
+    // section的名称，占用16字节
 	char		sectname[16];	/* name of this section */
+    // section所属的段的名称，也占用16字节
 	char		segname[16];	/* segment this section goes in */
+    // section在内存中的起始位置
 	uint64_t	addr;		/* memory address of this section */
+    // section占用的内存大小
 	uint64_t	size;		/* size in bytes of this section */
+    // section的文件偏移地址
 	uint32_t	offset;		/* file offset of this section */
+    // section的字节对齐大小
 	uint32_t	align;		/* section alignment (power of 2) */
+    // 重定位入口的文件偏移量
 	uint32_t	reloff;		/* file offset of relocation entries */
+    // 需要重定位的入口数量
 	uint32_t	nreloc;		/* number of relocation entries */
+    // section的类型和属性
 	uint32_t	flags;		/* flags (section type and attributes)*/
+    // 系统保留字段
 	uint32_t	reserved1;	/* reserved (for offset or index) */
 	uint32_t	reserved2;	/* reserved (for count or sizeof) */
 	uint32_t	reserved3;	/* reserved */
