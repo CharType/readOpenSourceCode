@@ -699,9 +699,13 @@ struct fvmlib_command {
  * at runtime is exactly the same as used to built the program.
  */
 struct dylib {
+    // 依赖库的完整路径，动态链接器在加载动态库的时候，会通过这个路径进行加载
     union lc_str  name;			/* library's path name */
+    // 依赖构建时候的时间戳
     uint32_t timestamp;			/* library's build time stamp */
+    // 当前的版本号
     uint32_t current_version;		/* library's current version number */
+    // 兼容版本号
     uint32_t compatibility_version;	/* library's compatibility vers number*/
 };
 
@@ -713,8 +717,7 @@ struct dylib {
  * LC_REEXPORT_DYLIB) for each library it uses.
  */
 struct dylib_command {
-	uint32_t	cmd;		/* LC_ID_DYLIB, LC_LOAD_{,WEAK_}DYLIB,
-					   LC_REEXPORT_DYLIB */
+	uint32_t	cmd;		/* LC_ID_DYLIB, LC_LOAD_{,WEAK_}DYLIB, LC_REEXPORT_DYLIB */
 	uint32_t	cmdsize;	/* includes pathname string */
 	struct dylib	dylib;		/* the library identification */
 };
