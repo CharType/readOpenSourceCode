@@ -61,17 +61,18 @@
 
 #include <mach/machine/exception.h>
 
-/*
+/* 异常型号通知类型的定义
  *	Machine-independent exception definitions.
  */
-
+// 内存问题产生的崩溃，野指针，内存泄漏等等
 #define EXC_BAD_ACCESS		1	/* Could not access memory */
 		/* Code contains kern_return_t describing error. */
 		/* Subcode contains bad memory address. */
-
+// 可能有多种情况 多线程死锁 调用了一个不能识别的消息 等等
 #define EXC_BAD_INSTRUCTION	2	/* Instruction failed */
 		/* Illegal or undefined instruction or operand */
 
+// 算术异常 除0，整数溢出之类的崩溃
 #define EXC_ARITHMETIC		3	/* Arithmetic exception */
 		/* Exact nature of exception is in code field */
 
@@ -79,27 +80,32 @@
 		/* Emulation support instruction encountered */
 		/* Details in code and subcode fields	*/
 
+// 系统调用异常（在iOS应用中不会出现，属于操作系统的问题）
 #define EXC_SOFTWARE		5	/* Software generated exception */
 		/* Exact exception is in code field. */
 		/* Codes 0 - 0xFFFF reserved to hardware */
 		/* Codes 0x10000 - 0x1FFFF reserved for OS emulation (Unix) */
 
+// 断点指令产生异常,少部分操作系统中会产生这种异常
 #define EXC_BREAKPOINT		6	/* Trace, breakpoint, etc. */
 		/* Details in code field. */
 
+// 应用程序访问内核或者网络的时候产生的异常 EXC_MACH_SYSCALL 也是同样的
 #define EXC_SYSCALL		7	/* System calls. */
 
 #define EXC_MACH_SYSCALL	8	/* Mach system calls. */
 
 #define EXC_RPC_ALERT		9	/* RPC alert */
-
+// 应用程序异常退出
 #define EXC_CRASH		10	/* Abnormal process exit */
-
+// 因为资源消耗限制产生的异常，比如内存限制(OOM)，CPU使用限制等等
+// 根据OOM产生的JetsamEvent日志中的rpages和pageSize可以计算出单个APP在设备上占用的最大值
 #define EXC_RESOURCE		11	/* Hit resource consumption limit */
 		/* Exact resource is in code field. */
-
+//访问了非法资源产生的崩溃，文件句柄错误（iOS上很少出现）
 #define EXC_GUARD		12	/* Violated guarded resource protections */
 
+// 无法捕获，被系统杀掉
 #define EXC_CORPSE_NOTIFY	13	/* Abnormal process exited to corpse state */
 
 #define EXC_CORPSE_VARIANT_BIT	0x100  /* bit set for EXC_*_CORPSE variants of EXC_* */
