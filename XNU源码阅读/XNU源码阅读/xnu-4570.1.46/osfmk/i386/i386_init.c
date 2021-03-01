@@ -373,6 +373,7 @@ vstart_idt_init(void)
  * Non-bootstrap processors are called with argument boot_args_start NULL.
  * These processors switch immediately to the existing kernel page tables.
  */
+// 是i386/x64架构下官方的内核初始化函数，标志着从汇编到C语言代码的转换
 __attribute__((noreturn))
 void
 vstart(vm_offset_t boot_args_start)

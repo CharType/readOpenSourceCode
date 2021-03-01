@@ -305,13 +305,20 @@ typedef struct
   mach_msg_descriptor_type_t    type: 8;
 } mach_msg_ool_descriptor32_t;
 
+// 描述了要附加的数据地址和大小
 typedef struct
 {
+  // 指向数据的指针
   uint64_t			address;
+  // 发送之后是否解除分配
   boolean_t     		deallocate: 8;
+ // 复制指令
   mach_msg_copy_options_t       copy: 8;
+ // 预留
   unsigned int     		pad1: 8;
+// MACH_MSG_OOL_DESCRIPTOR
   mach_msg_descriptor_type_t    type: 8;
+ // 在address处数据大小
   mach_msg_size_t       	size;
 } mach_msg_ool_descriptor64_t;
 
@@ -421,6 +428,7 @@ typedef struct
         mach_msg_body_t         body;
 } mach_msg_base_t;
 
+// 消息尾部类型定义
 typedef	unsigned int mach_msg_trailer_type_t;
 
 #define	MACH_MSG_TRAILER_FORMAT_0	0
@@ -428,6 +436,7 @@ typedef	unsigned int mach_msg_trailer_type_t;
 typedef	unsigned int mach_msg_trailer_size_t;
 typedef char *mach_msg_trailer_info_t;
 
+// 消息尾部
 typedef struct 
 {
   mach_msg_trailer_type_t	msgh_trailer_type;
@@ -443,6 +452,7 @@ typedef struct
  *  multiple threads receive and/or process received
  *  messages.
  */
+// 消息顺序编号
 typedef struct
 {
   mach_msg_trailer_type_t       msgh_trailer_type;
@@ -455,6 +465,7 @@ typedef struct
   unsigned int			val[2];
 } security_token_t;
 
+// 消息发送者的安全令牌
 typedef struct 
 {
   mach_msg_trailer_type_t	msgh_trailer_type;
@@ -486,6 +497,7 @@ typedef struct
   audit_token_t			msgh_audit;
 } mach_msg_audit_trailer_t;
 
+// 消息审计令牌
 typedef struct 
 {
   mach_msg_trailer_type_t	msgh_trailer_type;
@@ -496,6 +508,7 @@ typedef struct
   mach_port_context_t		msgh_context;
 } mach_msg_context_trailer_t;
 
+// 审计令牌
 #if defined(MACH_KERNEL_PRIVATE) && defined(__arm64__)
 typedef struct 
 {
@@ -528,7 +541,7 @@ typedef struct
    Trailer type to pass MAC policy label info as a mach message trailer.
    
 */
-
+// MAC策略标签
 typedef struct
 {
   mach_msg_trailer_type_t       msgh_trailer_type;

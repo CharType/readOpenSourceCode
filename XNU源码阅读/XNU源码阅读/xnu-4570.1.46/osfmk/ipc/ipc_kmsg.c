@@ -138,20 +138,28 @@
 #include <libkern/OSAtomic.h>
 
 #pragma pack(4)
-
+// 消息头
 typedef	struct 
 {
+  // 消息头的标志位
   mach_msg_bits_t	msgh_bits;
+  // 消息头大小，以字节为单位
   mach_msg_size_t	msgh_size;
+  // 目标 发出的消息 或者,接受的消息
   mach_port_name_t	msgh_remote_port;
+    // 源，或者目标
   mach_port_name_t	msgh_local_port;
   mach_port_name_t	msgh_voucher_port;
+    // 消息id
   mach_msg_id_t		msgh_id;
 } mach_msg_legacy_header_t;
 
+// mach消息
 typedef struct
 {
+    // 消息头
         mach_msg_legacy_header_t       header;
+    // 消息内容
         mach_msg_body_t         body;
 } mach_msg_legacy_base_t;
 

@@ -279,6 +279,7 @@ PE_init_iokit(void)
 	StartIOKit(PE_state.deviceTreeHead, PE_state.bootArgs, (void *) 0, (void *) 0);
 }
 
+// 调用这个函数来设置PE_state,最重要的是设置bootArgs指针，其他内核组件可以通过PE_parse_boot_argn访问引导参数
 void
 PE_init_platform(boolean_t vm_initialized, void *args)
 {

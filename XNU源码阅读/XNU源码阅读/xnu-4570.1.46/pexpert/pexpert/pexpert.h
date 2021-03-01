@@ -247,17 +247,28 @@ enum {
    kPEScaleFactor2x      = 2
 };
 
+// 图形控制台信息
 struct PE_Video {
+        // 视频内存的基地址
         unsigned long   v_baseAddr;     /* Base address of video memory */
+       // 每一个像素行的字节数
         unsigned long   v_rowBytes;     /* Number of bytes per pixel row */
+       // 宽度
         unsigned long   v_width;        /* Width */
+      // 高度
         unsigned long   v_height;       /* Height */
+      // 像素深度
         unsigned long   v_depth;        /* Pixel Depth */
+      // 文本或图形
         unsigned long   v_display;      /* Text or Graphics */
 	char		v_pixelFormat[64];
+    // 视频内存中开始位置的偏移
 	unsigned long	v_offset;	/* offset into video memory to start at */
+    // 视频内存的长度
 	unsigned long	v_length;	/* length of video memory (0 for v_rowBytes * v_height) */
+    // 旋转度数
 	unsigned char	v_rotate;	/* Rotation: 0:normal, 1:right 90, 2:left 180, 3:left 90 */
+    // x & y的放大缩小比例
 	unsigned char	v_scale;	/* Scale Factor for both X & Y */
 	char		reserved1[2];
 #ifdef __LP64__
@@ -295,9 +306,10 @@ extern int PE_initialize_console(
 
 extern void PE_display_icon( unsigned int flags,
 			     const char * name );
-
+// PE_state 是一个平台相关的数据结构，保存机器的初始状态，引导加载器设置
 typedef struct PE_state {
 	boolean_t	initialized;
+    //图形控制台的信息
 	PE_Video	video;
 	void		*deviceTreeHead;
 	void		*bootArgs;

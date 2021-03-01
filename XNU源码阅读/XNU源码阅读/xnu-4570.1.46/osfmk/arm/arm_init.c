@@ -136,6 +136,7 @@ unsigned int page_shift_user32;	/* for page_size as seen by a 32-bit task */
 #endif /* __arm64__ */
 
 
+// IOS 平台初始化函数，初始化主CPU为可用状态，然后准备好内核引导
 /*
  *		Routine:		arm_init
  *		Function:
