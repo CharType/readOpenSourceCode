@@ -718,15 +718,17 @@ typedef integer_t mach_msg_option_t;
 
 #define MACH_MSG_OPTION_NONE	0x00000000
 
-#define	MACH_SEND_MSG		0x00000001
-#define	MACH_RCV_MSG		0x00000002
+#define	MACH_SEND_MSG		0x00000001  // 发送msg缓冲区的消息
+#define	MACH_RCV_MSG		0x00000002  // 接受一条消息，放到msg缓存中
 
-#define MACH_RCV_LARGE		0x00000004	/* report large message sizes */
+#define MACH_RCV_LARGE		0x00000004	/* report large message sizes */ // 如果缓冲区太小，则将过大的消息放到队列中，并出粗返回MACH_RCV_TOO_LARGE
 #define MACH_RCV_LARGE_IDENTITY	0x00000008	/* identify source of large messages */
-
+// 接收操作时候要注意timeout参数，如果超过了timeout之后还没有收到消息，那么出错返回MACH_CV_TIMED_OUT timeout值可以为0
 #define MACH_SEND_TIMEOUT	0x00000010	/* timeout value applies to send */
 #define MACH_SEND_OVERRIDE  0x00000020  /* priority override for send */
+// 允许操作被打断
 #define MACH_SEND_INTERRUPT	0x00000040	/* don't restart interrupted sends */
+// 带通知接收操作
 #define MACH_SEND_NOTIFY	0x00000080	/* arm send-possible notify */
 #define MACH_SEND_ALWAYS	0x00010000	/* ignore qlimits - kernel only */
 #define MACH_SEND_TRAILER	0x00020000	/* sender-provided trailer */
