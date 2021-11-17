@@ -345,7 +345,9 @@ struct vm_map_entry {
 
 
 struct vm_map_header {
+    // 首地址，末地址，最小值，最大值
 	struct vm_map_links	links;		/* first, last, min, max */
+    // 条目数
 	int			nentries;	/* Number of entries */
 	boolean_t		entries_pageable;
 						/* are map entries pageable? */
@@ -374,14 +376,23 @@ struct vm_map_header {
  *		insertion, or removal.  Another hint is used to
  *		quickly find free space.
  */
+// vm_map表示vm_map_size 字节的内存
 struct _vm_map {
+    // 读写锁
 	lck_rw_t			lock;		/* map lock */
+    // 映射条目的header
 	struct vm_map_header	hdr;		/* Map entry header */
+    // 范围起始地址
 #define min_offset		hdr.links.start	/* start of range */
+    // 范围结束地址
 #define max_offset		hdr.links.end	/* end of range */
+    // 物理映射
 	pmap_t			pmap;		/* Physical map */
+    // 虚拟内存大小
 	vm_map_size_t		size;		/* virtual size */
+    // 用户锁定的内存的rlimt
 	vm_map_size_t		user_wire_limit;/* rlimit on user locked memory */
+    // 在这个映射中用户锁定内存的当前大小
 	vm_map_size_t		user_wire_size; /* current size of user locked memory in this map */
 #if __x86_64__
 	vm_map_offset_t		vmmap_high_start;
@@ -411,9 +422,11 @@ struct _vm_map {
 #endif	/* TASK_SWAPPER */
 	decl_lck_mtx_data(,	s_lock)		/* Lock ref, res fields */
 	lck_mtx_ext_t		s_lock_ext;
+    // 快速查询的hint
 	vm_map_entry_t		hint;		/* hint for quick lookups */
 	struct vm_map_links*	hole_hint;	/* hint for quick hole lookups */
 	union{
+        // 第一个空闲控件的hint
 		vm_map_entry_t		_first_free;	/* First free space hint */
 		struct vm_map_links*	_holes;		/* links all holes between entries */
 	}f_s;						/* Union for free space data structures being used */
@@ -421,11 +434,15 @@ struct _vm_map {
 #define first_free		f_s._first_free
 #define holes_list		f_s._holes
 
-	unsigned int		
+	unsigned int
+    // 调用者是否应该等待空间？
 	/* boolean_t */		wait_for_space:1, /* Should callers wait for space? */
+    // 是否所有的内存都是联动的
 	/* boolean_t */		wiring_required:1, /* All memory wired? */
+    // 是否没有用0填充的缺页
 	/* boolean_t */		no_zero_fill:1, /*No zero fill absent pages */
 	/* boolean_t */		mapped_in_other_pmaps:1, /*has this submap been mapped in maps that use a different pmap */
+    // 防止被切换时候发生写错误
 	/* boolean_t */		switch_protect:1, /*  Protect map from write faults while switched */
 	/* boolean_t */		disable_vmentry_reuse:1, /*  All vm entries should keep using newer and higher addresses in the map */ 
 	/* boolean_t */		map_disallow_data_exec:1, /* Disallow execution from data pages on exec-permissive architectures */
